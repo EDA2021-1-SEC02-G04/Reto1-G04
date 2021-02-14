@@ -28,6 +28,28 @@ import csv
 """
 El controlador se encarga de mediar entre la vista y el modelo.
 """
+def initCatalog():
+    catalog = model.newCatalog()
+    return catalog
+
+def loadData(catalog):
+
+    loadvideos(catalog)
+    loadcategorias(catalog)
+
+def loadcategorias(catalog):
+
+    categoriafile = cf.data_dir + 'videos/category-id.csv'
+    input_file = csv.DictReader(open(categoriafile, encoding='utf-8'))
+    for book in input_file:
+        model.addBook(catalog, categorias)
+def loadvideos(catalog):
+    
+    videosfile = cf.data_dir + 'videos/videos-small.csv'
+    input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
+    for book in input_file:
+        model.addBook(catalog, videos)
+
 
 # Inicialización del Catálogo de libros
 
