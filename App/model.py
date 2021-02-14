@@ -34,7 +34,18 @@ assert cf
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
 los mismos.
 """
+def newCatalog():
+    """
+    Inicializa el catálogo de libros. Crea una lista vacia para guardar
+    todos los videos, adicionalmente, crea una lista vacia para las categorias. Retorna el catalogo inicializado.
+    """
+    catalog = {'videos': None,
+               'categorias': None,}
 
+    catalog['videos'] = lt.newList()
+    catalog['categorias'] = lt.newList()
+
+    return catalog
 # Construccion de modelos
 
 # Funciones para agregar informacion al catalogo
