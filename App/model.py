@@ -34,6 +34,7 @@ assert cf
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
 los mismos.
 """
+# Construccion de modelos
 def newCatalog():
     """
     Inicializa el catálogo de libros. Crea una lista vacia para guardar
@@ -46,10 +47,32 @@ def newCatalog():
     catalog['categorias'] = lt.newList()
 
     return catalog
-# Construccion de modelos
 
 # Funciones para agregar informacion al catalogo
+def addVideo(catalog, book):
+    # Se adiciona el libro a la lista de libros
+    lt.addLast(catalog['videos'], video)
+    # Se obtienen los autores del libro
+    categorias = video['category_id'].split(",")
+    # Cada autor, se crea en la lista de libros del catalogo, y se
+    # crea un libro en la lista de dicho autor (apuntador al libro)
+    for categoria in categorias:
+        addBookAuthor(catalog, author.strip(), book)
 
+
+def addVideoCategoria(catalog, categoria, video):
+    """
+    Adiciona un autor a lista de autores, la cual guarda referencias
+    a los libros de dicho autor
+    """
+    authors = catalog['authors']
+    posauthor = lt.isPresent(authors, authorname)
+    if posauthor > 0:
+        author = lt.getElement(authors, posauthor)
+    else:
+        author = newAuthor(authorname)
+        lt.addLast(authors, author)
+    lt.addLast(author['books'], book)
 # Funciones para creacion de datos
 
 # Funciones de consulta
