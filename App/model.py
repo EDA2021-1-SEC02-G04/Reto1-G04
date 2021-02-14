@@ -57,22 +57,15 @@ def addVideo(catalog, book):
     # Cada autor, se crea en la lista de libros del catalogo, y se
     # crea un libro en la lista de dicho autor (apuntador al libro)
     for categoria in categorias:
-        addBookAuthor(catalog, author.strip(), book)
+        addVideoCategoria(catalog, categoria.strip(), video)
 
 
-def addVideoCategoria(catalog, categoria, video):
+def addCategoria(catalog, categoria):
     """
-    Adiciona un autor a lista de autores, la cual guarda referencias
-    a los libros de dicho autor
+    Adiciona un tag a la lista de tags
     """
-    authors = catalog['authors']
-    posauthor = lt.isPresent(authors, authorname)
-    if posauthor > 0:
-        author = lt.getElement(authors, posauthor)
-    else:
-        author = newAuthor(authorname)
-        lt.addLast(authors, author)
-    lt.addLast(author['books'], book)
+    t = newTag(tag['tag_name'], tag['tag_id'])
+    lt.addLast(catalog['tags'], t)
 # Funciones para creacion de datos
 
 # Funciones de consulta

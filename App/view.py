@@ -42,7 +42,19 @@ def printMenu():
     print("4- Video que más dias ha sido trending en una categoria")
     print("5- Videos con más likes en un pais con un tag en especifico")
 
-catalog = None
+def initCatalog():
+    """
+    Inicializa el catalogo de libros
+    """
+    return controller.initCatalog()
+
+
+def loadData(catalog):
+    
+    """
+    Carga los libros en la estructura de datos
+    """
+    controller.loadData(catalog)
 
 """
 Menu principal
