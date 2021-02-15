@@ -64,9 +64,10 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
+        catalog = initCatalog()
         loadData(catalog)
-        print('videos: ' + str(lt.size(catalog['videos'])))
-        print(' categorias cargadas: ' + str(lt.size(catalog['categorias'])))
+        print('Videos cargados: ' + str(lt.size(catalog['videos'])))
+        print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
     elif int(inputs[0]) == 2:
         print("Cargando videos con más views ....")
     elif int(inputs[0]) == 3:
