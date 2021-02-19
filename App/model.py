@@ -35,7 +35,7 @@ Se define la estructura de un catálogo de videos. El catálogo tendrá dos list
 los mismos.
 """
 # Construccion de modelos
-def newCatalog():
+def newCatalog(estructura:str):
     """
     Inicializa el catálogo de libros. Crea una lista vacia para guardar
     todos los videos, adicionalmente, crea una lista vacia para las categorias. Retorna el catalogo inicializado.
@@ -43,8 +43,8 @@ def newCatalog():
     catalog = {'videos': None,
                'categorias': None,}
 
-    catalog['videos'] = lt.newList()
-    catalog['categorias'] = lt.newList()
+    catalog['videos'] = lt.newList(datastructure=estructura)
+    catalog['categorias'] = lt.newList(datastructure=estructura)
 
     return catalog
 

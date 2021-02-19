@@ -42,11 +42,11 @@ def printMenu():
     print("4- Video que más dias ha sido trending en una categoria")
     print("5- Videos con más likes en un pais con un tag en especifico")
 
-def initCatalog():
+def initCatalog(estructura:str):
     """
     Inicializa el catalogo de libros
     """
-    return controller.initCatalog()
+    return controller.initCatalog(estructura)
 
 
 def loadData(catalog):
@@ -64,7 +64,7 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-        catalog = initCatalog()
+        catalog = initCatalog(input("Que estructura desea:SINGLE LINKED o ARRAY LIST"))
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
