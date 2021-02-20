@@ -44,7 +44,7 @@ def printMenu():
 
 def initCatalog(estructura:str):
     """
-    Inicializa el catalogo de libros
+    Crea el catalogo de videos
     """
     return controller.initCatalog(estructura)
 
@@ -52,7 +52,7 @@ def initCatalog(estructura:str):
 def loadData(catalog):
     
     """
-    Carga los libros en la estructura de datos
+    Carga los videos en la estructura de datos
     """
     controller.loadData(catalog)
 
@@ -64,7 +64,7 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-        catalog = initCatalog(input("Que estructura desea:SINGLE LINKED o ARRAY LIST"))
+        catalog = initCatalog(input("Que estructura desea, SINGLE_LINKED o ARRAY_LIST: "))
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
