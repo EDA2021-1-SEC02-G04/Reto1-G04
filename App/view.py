@@ -44,11 +44,7 @@ def printMenu():
 
 def initCatalog(estructura:str):
     """
-<<<<<<< HEAD
     Inicializa el catalogo de videos
-=======
-    Crea el catalogo de videos
->>>>>>> f979ca2407b5f3874e54989b3558c618d15ef867
     """
     return controller.initCatalog(estructura)
 
@@ -60,15 +56,16 @@ def loadData(catalog):
     """
     controller.loadData(catalog)
 
-def printResults(ord_books, sample=10):
-    size = lt.size(ord_books)
+def printResults(videos, sample=10):
+    size = lt.size(videos)
     if size > sample:
-        print("Los primeros ", sample, " libros ordenados son:")
+        print("Los ", sample, " videos con más views son:")
         i=0
         while i <= sample:
-            book = lt.getElement(ord_books,i)
-            print('Titulo: ' + book['title'] + ' ISBN: ' +
-                book['isbn'] + ' Rating: ' + book['average_rating'])
+            video = lt.getElement(videos,i)
+            print('Titulo: ' + video['title'] + " views: " + video["views"]+ " canal: "
+            + video["channel_title"] + " fecha trending: "+ video["trending_date"]+" Fecha de publicación: "
+            + video["publish_time"] + " likes: "+video["likes"] +" dislikes: " +video["dislikes"])
             i+=1
 
 
@@ -86,18 +83,19 @@ while True:
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
     elif int(inputs[0]) == 2:
         print("Cargando videos con más views ....")
-    elif int(inputs[0]) == 3:
-        print("Cargando videos con mayor tiempo en trending en un pais ....")
-    elif int(inputs[0]) == 4:
-        print("Cargando video con más dias en trending ....")
-    elif int(inputs[0]) == 5:
-        print("Cargando videos con más likes de un tag en especifico ....")
-    elif int(inputs[0]) == 5:
         size = input("Indique tamaño de la muestra: ")
-        result = controller.sortBooks(catalog, int(size))
-        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
-                                          str(result[0]))
-        printResults(result[1])
+        result = controller.sortVideos(catalog, int(size))
+
+        printResults(result)
+    elif int(inputs[0]) == 3:
+        print("Cargando videos con más views ....")
+    elif int(inputs[0]) == 4:
+        print("Cargando videos con mayor tiempo en trending en un pais ....")
+    elif int(inputs[0]) == 5:
+        print("Cargando video con más dias en trending ....")
+    elif int(inputs[0]) == 6:
+        print("Cargando videos con más likes de un tag en especifico ....")
+
 
     else:
         sys.exit(0)
