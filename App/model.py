@@ -37,7 +37,7 @@ los mismos.
 # Construccion de modelos
 def newCatalog(estructura:str):
     """
-    Inicializa el catálogo de libros. Crea una lista vacia para guardar
+    Inicializa el catálogo de videos. Crea una lista vacia para guardar
     todos los videos, adicionalmente, crea una lista vacia para las categorias. Retorna el catalogo inicializado.
     """
     catalog = {'videos': None,
@@ -56,7 +56,7 @@ def addVideo(catalog, video):
 
 def addCategoria(catalog, categoria):
     """
-    Adiciona un tag a la lista de tags
+    Adiciona un categoria a la lista de categorias
     """
     cat = newCategoria(categoria['name'], categoria['id'])
     lt.addLast(catalog['categorias'], cat)
@@ -65,7 +65,7 @@ def addCategoria(catalog, categoria):
 # Funciones para creacion de datos
 def newCategoria(name, id):
     """
-    Esta estructura almancena los tags utilizados para marcar libros.
+    Esta estructura almacena las categorias con sus id respectivos.
     """
     categoria = {'name': '', 'id': ''}
     categoria['name'] = name

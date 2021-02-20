@@ -44,7 +44,11 @@ def printMenu():
 
 def initCatalog(estructura:str):
     """
+<<<<<<< HEAD
     Inicializa el catalogo de videos
+=======
+    Crea el catalogo de videos
+>>>>>>> f979ca2407b5f3874e54989b3558c618d15ef867
     """
     return controller.initCatalog(estructura)
 
@@ -76,7 +80,7 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-        catalog = initCatalog(input("Que estructura desea:SINGLE LINKED o ARRAY LIST"))
+        catalog = initCatalog(input("Que estructura desea, SINGLE_LINKED o ARRAY_LIST: "))
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
