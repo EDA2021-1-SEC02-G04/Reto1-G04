@@ -44,7 +44,7 @@ def printMenu():
 
 def initCatalog(estructura:str):
     """
-    Inicializa el catalogo de libros
+    Inicializa el catalogo de videos
     """
     return controller.initCatalog(estructura)
 
@@ -52,9 +52,21 @@ def initCatalog(estructura:str):
 def loadData(catalog):
     
     """
-    Carga los libros en la estructura de datos
+    Carga los videos en la estructura de datos
     """
     controller.loadData(catalog)
+
+def printResults(ord_books, sample=10):
+    size = lt.size(ord_books)
+    if size > sample:
+        print("Los primeros ", sample, " libros ordenados son:")
+        i=0
+        while i <= sample:
+            book = lt.getElement(ord_books,i)
+            print('Titulo: ' + book['title'] + ' ISBN: ' +
+                book['isbn'] + ' Rating: ' + book['average_rating'])
+            i+=1
+
 
 """
 Menu principal
@@ -76,6 +88,12 @@ while True:
         print("Cargando video con más dias en trending ....")
     elif int(inputs[0]) == 5:
         print("Cargando videos con más likes de un tag en especifico ....")
+    elif int(inputs[0]) == 5:
+        size = input("Indique tamaño de la muestra: ")
+        result = controller.sortBooks(catalog, int(size))
+        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                                          str(result[0]))
+        printResults(result[1])
 
     else:
         sys.exit(0)
