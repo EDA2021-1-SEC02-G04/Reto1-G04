@@ -60,7 +60,7 @@ def printResults(videos, sample=10):
     size = lt.size(videos)
     if size > sample:
         print("Los ", sample, " videos con más views son:")
-        i=0
+        i=1
         while i <= sample:
             video = lt.getElement(videos,i)
             print('Titulo: ' + video['title'] + " views: " + video["views"]+ " canal: "
