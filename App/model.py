@@ -92,11 +92,18 @@ def cmpVideosByViews(video1, video2):
         return True
     else:
         return False
-def sortVideos(catalog, size):
+def sortVideos(catalog, size,algoritmo):
     sub_list = lt.subList(catalog['videos'], 0, size)
     sub_list = sub_list.copy()
     tiempo_inicio = time.process_time()
-    sorted_list = sa.sort(sub_list, cmpVideosByViews)
+    if algoritmo=="shell":
+        sorted_list = sa.sort(sub_list, cmpVideosByViews)
+    elif algoritmo=="selection":
+        sorted_list = ss.sort(sub_list, cmpVideosByViews)
+    elif algoritmo=="insertion":
+        sorted_list = ins.sort(sub_list, cmpVideosByViews)
+    else:
+        return "Vuelva a escribir en minusculas"
     tiempo_final = time.process_time()
     tiempo = (tiempo_final - tiempo_inicio)*1000
     return sorted_list,tiempo
