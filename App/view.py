@@ -85,15 +85,13 @@ while True:
         print("Cargando videos con más views ....")
         size = input("Indique tamaño de la muestra: ")
         result = controller.sortVideos(catalog, int(size))
-
-        printResults(result)
+        print("Para la muestra de", size, " videos, el tiempo (mseg) es: ", str(result[1]))
+        printResults(result[0])
     elif int(inputs[0]) == 3:
-        print("Cargando videos con más views ....")
-    elif int(inputs[0]) == 4:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
-    elif int(inputs[0]) == 5:
+    elif int(inputs[0]) == 4:
         print("Cargando video con más dias en trending ....")
-    elif int(inputs[0]) == 6:
+    elif int(inputs[0]) == 5:
         print("Cargando videos con más likes de un tag en especifico ....")
 
 

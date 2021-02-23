@@ -29,6 +29,7 @@ import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
+import time
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
@@ -92,8 +93,8 @@ def cmpVideosByViews(video1, video2):
 def sortVideos(catalog, size):
     sub_list = lt.subList(catalog['videos'], 0, size)
     sub_list = sub_list.copy()
-    
+    tiempo_inicio = time.process_time()
     sorted_list = sa.sort(sub_list, cmpVideosByViews)
-    
-    
-    return sorted_list
+    tiempo_final = time.process_time()
+    tiempo = (tiempo_final - tiempo_inicio)*1000
+    return sorted_list,tiempo
