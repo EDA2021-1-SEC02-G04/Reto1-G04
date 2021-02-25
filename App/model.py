@@ -28,7 +28,10 @@
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import selectionsort as ss
+from DISClib.Algorithms.Sorting import insertionsort as ins
 assert cf
+import time
 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá dos listas, una para los videos, otra para las categorias de
@@ -37,7 +40,7 @@ los mismos.
 # Construccion de modelos
 def newCatalog(estructura:str):
     """
-    Inicializa el catálogo de libros. Crea una lista vacia para guardar
+    Inicializa el catálogo de videos. Crea una lista vacia para guardar
     todos los videos, adicionalmente, crea una lista vacia para las categorias. Retorna el catalogo inicializado.
     """
     catalog = {'videos': None,
@@ -56,7 +59,7 @@ def addVideo(catalog, video):
 
 def addCategoria(catalog, categoria):
     """
-    Adiciona un tag a la lista de tags
+    Adiciona un categoria a la lista de categorias
     """
     cat = newCategoria(categoria['name'], categoria['id'])
     lt.addLast(catalog['categorias'], cat)
@@ -65,7 +68,7 @@ def addCategoria(catalog, categoria):
 # Funciones para creacion de datos
 def newCategoria(name, id):
     """
-    Esta estructura almancena los tags utilizados para marcar libros.
+    Esta estructura almacena las categorias con sus id respectivos.
     """
     categoria = {'name': '', 'id': ''}
     categoria['name'] = name
@@ -75,4 +78,32 @@ def newCategoria(name, id):
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
-# Funciones de ordenamiento
+def cmpVideosByViews(video1, video2):
+    """
+    Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
+    Args:
+    video1: informacion del primer video que incluye su valor 'views'
+    video2
+
+    # Funciones de ordenamiento
+    """
+    
+    if (float(video1['views']) > float(video2['views'])):
+        return True
+    else:
+        return False
+def sortVideos(catalog, size,algoritmo):
+    sub_list = lt.subList(catalog['videos'], 0, size)
+    sub_list = sub_list.copy()
+    tiempo_inicio = time.process_time()
+    if algoritmo=="shell":
+        sorted_list = sa.sort(sub_list, cmpVideosByViews)
+    elif algoritmo=="selection":
+        sorted_list = ss.sort(sub_list, cmpVideosByViews)
+    elif algoritmo=="insertion":
+        sorted_list = ins.sort(sub_list, cmpVideosByViews)
+    else:
+        return "Vuelva a escribir en minusculas"
+    tiempo_final = time.process_time()
+    tiempo = (tiempo_final - tiempo_inicio)*1000
+    return sorted_list,tiempo
