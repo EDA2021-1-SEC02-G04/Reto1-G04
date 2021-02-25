@@ -104,9 +104,9 @@ def sortVideos(catalog, size,algoritmo):
         sorted_list = ss.sort(sub_list, cmpVideosByViews)
     elif algoritmo=="insertion":
         sorted_list = ins.sort(sub_list, cmpVideosByViews)
-    elif algoritmo=="mergesort":
+    elif algoritmo=="merge":
         sorted_list = ms.sort(sub_list, cmpVideosByViews)
-    elif algoritmo=="quicksort":
+    elif algoritmo=="quick":
         sorted_list = qs.sort(sub_list, cmpVideosByViews)
     else:
         return "Vuelva a escribir en minusculas"
