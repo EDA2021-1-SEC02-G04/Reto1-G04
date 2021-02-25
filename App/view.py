@@ -84,7 +84,7 @@ while True:
     elif int(inputs[0]) == 2:
         print("Cargando videos con más views ....")
         size = input("Indique tamaño de la muestra: ")
-        algoritmo=input("¿Con que algoritmo quiere que se desarrolle el proceso: shell,insertion o selection?")
+        algoritmo=input("¿Con que algoritmo quiere que se desarrolle el proceso: shell,quicksort,mergesort,insertion o selection?")
         result = controller.sortVideos(catalog, int(size),algoritmo)
 
         print("Para la muestra de", size, " videos, el tiempo (mseg) es: ", str(result[1]))
