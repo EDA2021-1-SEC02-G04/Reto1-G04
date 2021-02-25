@@ -94,7 +94,8 @@ while True:
     elif int(inputs[0]) == 4:
         print("Cargando video con más dias en trending ....")
     elif int(inputs[0]) == 5:
-        print("Cargando videos con más likes de un tag en especifico ....")
+        print("Cargando Pvideos con más likes de un tag en especifico ....")
+
 
 
     else:
