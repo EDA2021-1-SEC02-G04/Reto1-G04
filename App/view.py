@@ -41,6 +41,7 @@ def printMenu():
     print("3- Video con mayor tiempo en trending de un pais")
     print("4- Video que más dias ha sido trending en una categoria")
     print("5- Videos con más likes en un pais con un tag en especifico")
+    print("0- Salir")
 
 def initCatalog(estructura:str):
     """
@@ -72,7 +73,8 @@ def printResults(videos, sample=10):
 """
 Menu principal
 """
-while True:
+continuar=True
+while continuar==True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
@@ -94,7 +96,9 @@ while True:
     elif int(inputs[0]) == 4:
         print("Cargando video con más dias en trending ....")
     elif int(inputs[0]) == 5:
-        print("Cargando Pvideos con más likes de un tag en especifico ....")
+        print("Cargando videos con más likes de un tag en especifico ....")
+    elif int(inputs[0]) == 0:
+        continuar=False
 
 
 
