@@ -56,7 +56,8 @@ def loadData(catalog):
     """
     controller.loadData(catalog)
 
-def printResults(videos, sample=10):
+def printResults(videos, sample):
+    sample=numeroT
     size = lt.size(videos)
     if size > sample:
         print("Los ", sample, " videos con más views son:")
@@ -86,9 +87,9 @@ while True:
         size = input("Indique tamaño de la muestra: ")
         algoritmo=input("¿Con que algoritmo quiere que se desarrolle el proceso: shell,quick,merge,insertion o selection?")
         result = controller.sortVideos(catalog, int(size),algoritmo)
-
+        numeroT=int(input("Que tan grande quiere que sea el top?"))
         print("Para la muestra de", size, " videos, el tiempo (mseg) es: ", str(result[1]))
-        printResults(result[0])
+        printResults(result[0],numeroT)
     elif int(inputs[0]) == 3:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
     elif int(inputs[0]) == 4:
