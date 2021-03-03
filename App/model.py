@@ -58,25 +58,27 @@ def addVideo(catalog, video):
     # Se adiciona el video a la lista de videos
     lt.addLast(catalog['videos'], video)
     paises = video['country'].split(",")
+    categorias = video['category_id'].split(",")
     for pais in paises:
         addPaisVideo(catalog, pais.strip(), video)
-
-def addVideoCategoria(catalog, video):
-    # Se adiciona el video a la lista de videos
-    lt.addLast(catalog['videos'], video)
-    categorias = video['category'].split(",")
     for categoria in categorias:
-        addCategoria(catalog, categoria.strip(), video)
+        addCategoriaVideo(catalog, categoria.strip(), video)
 
+def addListaCategorias(catalog, categoria):
+    """
+    Adiciona una categoria a la lista de categorias
+    """
+    cat = newCategoria(categoria['name'], categoria['id'])
+    lt.addLast(catalog['categorias'], cat)
 
-def addCategoria(catalog, nombre_categoria,video):
+def addCategoriaVideo(catalog, id_categoria,video):
     """
     Adiciona un categoria a la lista de categorias
     """
     #cat = newCategoria(categoria['name'], categoria['id'])
     #lt.addLast(catalog['categorias'], cat)
     categorias_lista = catalog['categorias']
-    posvideo = lt.isPresent(categorias_lista, nombre_categoria)
+    posvideo = lt.isPresent(categorias_lista, id_categoria)
     if posvideo > 0:
         categoria = lt.getElement(categorias_lista, posvideo)
     else:
@@ -127,8 +129,8 @@ def comparepaises(pais1, pais2):
     if (pais1.lower() == pais2['name'].lower()):
         return 0
     return -1
-def comparecategorias(categoria1, categoria2):
-    if (categoria1.lower() == categoria2['category'].lower()):
+def comparecategorias(categoria1_id, categoria2_id):
+    if (categoria1_id.lower() == categoria2_id['id'].lower()):
         return 0
     return -1
 def cmpVideosByViews(video1, video2):

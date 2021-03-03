@@ -85,7 +85,6 @@ while continuar==True:
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
         print('Paises cargados: ' + str(lt.size(catalog['paises'])))
-        print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
     elif int(inputs[0]) == 2:
         print("Cargando videos con más views ....")
         size = input("Indique tamaño de la muestra: ")
@@ -102,6 +101,7 @@ while continuar==True:
         print("Cargando videos con más likes de un tag en especifico ....")
     elif int(inputs[0]) == 0:
         continuar=False
+
 
 
 
