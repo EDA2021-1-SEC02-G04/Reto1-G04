@@ -49,7 +49,7 @@ def newCatalog(estructura:str):
                'categorias': None,'paises': None}
 
     catalog['videos'] = lt.newList(datastructure=estructura)
-    catalog['categorias'] = lt.newList(datastructure=estructura)
+    catalog['categorias'] = lt.newList(datastructure=estructura,cmpfunction=comparecategorias)
     catalog['paises'] = lt.newList(datastructure=estructura,cmpfunction=comparepaises)
     return catalog
 
@@ -61,13 +61,28 @@ def addVideo(catalog, video):
     for pais in paises:
         addPaisVideo(catalog, pais.strip(), video)
 
+def addVideoCategoria(catalog, video):
+    # Se adiciona el video a la lista de videos
+    lt.addLast(catalog['videos'], video)
+    categorias = video['category'].split(",")
+    for categoria in categorias:
+        addCategoria(catalog, categoria.strip(), video)
 
-def addCategoria(catalog, categoria):
+
+def addCategoria(catalog, nombre_categoria,video):
     """
     Adiciona un categoria a la lista de categorias
     """
-    cat = newCategoria(categoria['name'], categoria['id'])
-    lt.addLast(catalog['categorias'], cat)
+    #cat = newCategoria(categoria['name'], categoria['id'])
+    #lt.addLast(catalog['categorias'], cat)
+    categorias_lista = catalog['categorias']
+    posvideo = lt.isPresent(categorias_lista, nombre_categoria)
+    if posvideo > 0:
+        categoria = lt.getElement(categorias_lista, posvideo)
+    else:
+        categoria = newCategoria(nombre_categoria,id)
+        lt.addLast(categorias_lista, categoria)
+    lt.addLast(categoria['videos'], video)
 
 def addPaisVideo(catalog, nombre_pais, video):
     """
@@ -112,7 +127,10 @@ def comparepaises(pais1, pais2):
     if (pais1.lower() == pais2['name'].lower()):
         return 0
     return -1
-
+def comparecategorias(categoria1, categoria2):
+    if (categoria1.lower() == categoria2['category'].lower()):
+        return 0
+    return -1
 def cmpVideosByViews(video1, video2):
     """
     Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
