@@ -77,7 +77,7 @@ def newCategoria(name, id):
 # Funciones de consulta
 
 # Funciones utilizadas para comparar elementos dentro de una lista
-
+ 
 def cmpVideosByViews(video1, video2):
     """
     Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
