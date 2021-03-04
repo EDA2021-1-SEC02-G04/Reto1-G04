@@ -41,6 +41,7 @@ def printMenu():
     print("3- Video con mayor tiempo en trending de un pais")
     print("4- Video que más dias ha sido trending en una categoria")
     print("5- Videos con más likes en un pais con un tag en especifico")
+    print("0- Salir")
 
 def initCatalog(estructura:str):
     """
@@ -56,7 +57,8 @@ def loadData(catalog):
     """
     controller.loadData(catalog)
 
-def printResults(videos, sample=10):
+def printResults(videos, sample):
+    sample=numeroT
     size = lt.size(videos)
     if size > sample:
         print("Los ", sample, " videos con más views son:")
@@ -72,7 +74,8 @@ def printResults(videos, sample=10):
 """
 Menu principal
 """
-while True:
+continuar=True
+while continuar==True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
@@ -81,20 +84,26 @@ while True:
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
+        print('Paises cargados: ' + str(lt.size(catalog['paises'])))
     elif int(inputs[0]) == 2:
         print("Cargando videos con más views ....")
         size = input("Indique tamaño de la muestra: ")
-        algoritmo=input("¿Con que algoritmo quiere que se desarrolle el proceso: shell,insertion o selection?")
-        result = controller.sortVideos(catalog, int(size),algoritmo)
-
+        algoritmo=input("¿Con que algoritmo quiere que se desarrolle el proceso: shell,quick,merge,insertion o selection?")
+        numeroT=int(input("Que tan grande quiere que sea el top?"))
+        pais= input("Indique el pais que desea analizar: ")
+        categoria= input("Indique la categoria que desea analizar: ")
+        result = controller.sortVideos(catalog, int(size),algoritmo,pais,categoria)
         print("Para la muestra de", size, " videos, el tiempo (mseg) es: ", str(result[1]))
-        printResults(result[0])
+        printResults(result[0],numeroT)
     elif int(inputs[0]) == 3:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
     elif int(inputs[0]) == 4:
         print("Cargando video con más dias en trending ....")
     elif int(inputs[0]) == 5:
-        print("Cargando Pvideos con más likes de un tag en especifico ....")
+        print("Cargando videos con más likes de un tag en especifico ....")
+    elif int(inputs[0]) == 0:
+        continuar=False
+
 
 
 

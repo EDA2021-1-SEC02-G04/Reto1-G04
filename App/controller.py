@@ -35,9 +35,9 @@ def initCatalog(estructura:str):
     return catalog
 
 def loadData(catalog):
-
-    loadVideos(catalog)
     loadCategorias(catalog)
+    loadVideos(catalog)
+    
 
 # Funciones para la carga de datos
 
@@ -47,9 +47,8 @@ def loadCategorias(catalog):
 
     input_file = csv.DictReader(open(categoriafile, encoding='utf-8'),delimiter='\t')
     for categoria in input_file:
-        model.addCategoria(catalog, categoria)
+        model.addListaCategorias(catalog, categoria)
 def loadVideos(catalog):
-    
     videosfile = cf.data_dir + 'videos-large.csv'
     input_file = csv.DictReader(open(videosfile, encoding='utf-8'))
     for video in input_file:
@@ -57,10 +56,10 @@ def loadVideos(catalog):
 
 
 # Funciones de ordenamiento
-def sortVideos(catalog, size,algoritmo):
+def sortVideos(catalog, size,algoritmo,pais,categoria):
     """
     Ordena los videos por average_rating
     """
-    return model.sortVideos(catalog, size,algoritmo)
+    return model.sortVideos(catalog, size,algoritmo,pais,categoria)
 
 # Funciones de consulta sobre el catálogo
