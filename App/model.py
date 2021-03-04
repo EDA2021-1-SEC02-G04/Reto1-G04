@@ -123,6 +123,15 @@ def newPais(name):
     pais['videos'] = lt.newList('ARRAY_LIST')
     return pais
 # Funciones de consulta
+def categoria_en_lista(cat_id,lista,comp):
+    nueva_lista=lt.newList(datastructure=ARRAY_LIST,cmpfunction=comp)
+    for i in range(1,lt.size(lista)+1)
+        video=lt.getElement(lista,i)
+        if video['category_id']==cat_id:
+            lt.addLast(nueva_lista,video)
+    return nueva_lista
+
+
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparepaises(pais1, pais2):
@@ -147,7 +156,9 @@ def cmpVideosByViews(video1, video2):
         return True
     else:
         return False
-def sortVideos(catalog, size,algoritmo):
+def sortVideos(catalog, size,algoritmo,pais,categoria):
+    
+    lista_ordenar=categoria_en_lista(categoria,lista,comp)
     sub_list = lt.subList(catalog['videos'], 0, size)
     sub_list = sub_list.copy()
     tiempo_inicio = time.process_time()
