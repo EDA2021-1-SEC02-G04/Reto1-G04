@@ -132,7 +132,6 @@ def categoria_en_lista(cat_id,lista,comp):
     return nueva_lista
 
 
-<<<<<<< HEAD
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparepaises(pais1, pais2):
@@ -143,10 +142,6 @@ def comparecategorias(categoria1_id, categoria2_id):
     if (categoria1_id.lower() == categoria2_id['id'].lower()):
         return 0
     return -1
-=======
-# Funciones utilizadas para comparar elementos dentro de una lista
- 
->>>>>>> 53ae8a123e28391b55af3b3198940f5bb6d28578
 def cmpVideosByViews(video1, video2):
     """
     Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
