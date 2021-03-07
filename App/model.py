@@ -103,12 +103,14 @@ def addPaisVideo(catalog, nombre_pais, video):
 
 # Funciones para creacion de datos
 def traduccion(categoria,catalog):
+    print('hola2')
     m=catalog["categorias"]
     for i in range(1,lt.size(m)):
         
         c=lt.getElement(m,i)
         if c['name'] == categoria:
             x=c['id']
+            print(x)
             return x
             break
 def newCategoria(name, id):
@@ -116,7 +118,7 @@ def newCategoria(name, id):
     Esta estructura almacena las categorias con sus id respectivos.
     """
     categoria = {'name': '', 'id': '', "videos": None}
-    categoria['name'] = name
+    categoria['name'] = name.lower()
     categoria['id'] = id
     categoria['videos'] = lt.newList('ARRAY_LIST')
     return categoria
@@ -127,7 +129,7 @@ def newPais(name):
     un autor y su promedio de ratings
     """
     pais = {'name': "", "categorias":None, "videos":None}
-    pais['name'] = name
+    pais['name'] = name.lower()
     pais['categorias'] = lt.newList('ARRAY_LIST')
     pais['videos'] = lt.newList('ARRAY_LIST')
     return pais
@@ -136,6 +138,7 @@ def newPais(name):
 el error está en esta función
 """
 def categoria_en_lista(categoria,lista,comp,catalog):
+    print('hola')
     nueva_lista=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comp)
     cat_id=traduccion(categoria,catalog)
     for i in range(1,lt.size(lista)):
@@ -160,7 +163,7 @@ def comparepaises(pais1, pais2):
         return 0
     return -1
 def comparecategorias(categoria1_id, categoria2_id):
-    if (categoria1_id.lower() == categoria2_id['id'].lower()):
+    if (categoria1_id == categoria2_id['id']):
         return 0
     return -1
 def cmpVideosByViews(video1, video2):
