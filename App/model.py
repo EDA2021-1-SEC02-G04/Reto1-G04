@@ -46,11 +46,12 @@ def newCatalog(estructura:str):
     todos los videos, adicionalmente, crea una lista vacia para las categorias. Retorna el catalogo inicializado.
     """
     catalog = {'videos': None,
-               'categorias': None,'paises': None}
+               'categorias': None,'paises': None, 'trending':None}
 
     catalog['videos'] = lt.newList(datastructure=estructura)
     catalog['categorias'] = lt.newList(datastructure=estructura,cmpfunction=comparecategorias)
     catalog['paises'] = lt.newList(datastructure=estructura,cmpfunction=comparepaises)
+    catalog['trending'] = lt.newList(datastructure=estructura,cmpfunction=comparetrending)
     return catalog
 
 # Funciones para agregar informacion al catalogo
@@ -63,6 +64,7 @@ def addVideo(catalog, video):
         addPaisVideo(catalog, pais.strip(), video)
     for categoria in categorias:
         addCategoriaVideo(catalog, categoria.strip(), video)
+    addTrending(catalog,video)
 
 def addListaCategorias(catalog, categoria):
     """
@@ -100,6 +102,15 @@ def addPaisVideo(catalog, nombre_pais, video):
         lt.addLast(paises_lista, pais)
     lt.addLast(pais['videos'], video)
 
+def addTrending(catalog,video):
+    trending_lista = catalog['trending']
+    nombre_video=video['title']
+    posvideo = lt.isPresent(trending_lista, nombre_video)
+    if posvideo > 0:
+        pass
+    else:
+        trending = newTrending(video,catalog)
+        lt.addLast(trending_lista, trending)
 
 # Funciones para creacion de datos
 def traduccion(categoria,catalog):
@@ -131,6 +142,19 @@ def newPais(name):
     pais['categorias'] = lt.newList('ARRAY_LIST')
     pais['videos'] = lt.newList('ARRAY_LIST')
     return pais
+
+def newTrending(video,catalog):
+    """
+    Crea una nueva estructura para modelar los libros de
+    un autor y su promedio de ratings
+    """
+    trending = {'name': None, 'channel':None, "categoria":None, 'pais': None, "trending":None}
+    trending['name'] = video['title']
+    trending['channel'] = video['channel_title']
+    trending['categoria'] = video['category_id']
+    trending['pais'] = video['country']
+    trending['trending']=contar_dias_trending(video['title'],catalog)
+    return trending
 # Funciones de consulta
 """
 el error está en esta función
@@ -151,6 +175,15 @@ def obtener_videos_pais(catalog,nombre_pais):
         return pais 
     return None
 
+def contar_dias_trending(video_nombre,catalog):
+    contador=0
+    videos=catalog['videos']
+    for i in range(1,lt.size(videos)): 
+        print('hola')
+        if lt.getElement(videos,i)['title']==video_nombre:
+            contador+=1
+            print(contador)
+    return contador 
 
 
 # Funciones utilizadas para comparar elementos dentro de una lista
@@ -160,6 +193,10 @@ def comparepaises(pais1, pais2):
     return -1
 def comparecategorias(categoria1_id, categoria2_id):
     if (categoria1_id == categoria2_id['id']):
+        return 0
+    return -1
+def comparetrending(trending1, trending2):
+    if (trending1 == trending2['name']):
         return 0
     return -1
 def cmpVideosByViews(video1, video2):
