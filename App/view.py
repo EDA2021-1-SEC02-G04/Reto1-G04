@@ -79,7 +79,7 @@ while continuar==True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
-        catalog = initCatalog(input("Que estructura desea, SINGLE_LINKED o ARRAY_LIST: "))
+        catalog = initCatalog("ARRAY_LIST")
         loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
