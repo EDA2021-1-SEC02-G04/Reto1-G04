@@ -123,13 +123,23 @@ def newPais(name):
     pais['videos'] = lt.newList('ARRAY_LIST')
     return pais
 # Funciones de consulta
+"""
+el error está en esta función
+"""
 def categoria_en_lista(cat_id,lista,comp):
-    nueva_lista=lt.newList(datastructure=ARRAY_LIST,cmpfunction=comp)
-    for i in range(1,lt.size(lista)+1)
+    nueva_lista=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comp)
+    for i in range(1,lt.size(lista)):
         video=lt.getElement(lista,i)
         if video['category_id']==cat_id:
             lt.addLast(nueva_lista,video)
     return nueva_lista
+
+def obtener_videos_pais(catalog,nombre_pais):
+    posvideo = lt.isPresent(catalog['paises'], nombre_pais)
+    if posvideo > 0:
+        pais = lt.getElement(catalog['paises'],posvideo)
+        return pais 
+    return None
 
 
 
@@ -156,10 +166,12 @@ def cmpVideosByViews(video1, video2):
         return True
     else:
         return False
-def sortVideos(catalog, size,algoritmo,pais,categoria):
-    
-    lista_ordenar=categoria_en_lista(categoria,lista,comp)
-    sub_list = lt.subList(catalog['videos'], 0, size)
+def sortVideos(catalog,algoritmo,pais,categoria):
+    pais=obtener_videos_pais(catalog,pais)
+    lista_pais=pais['videos']
+    lista_ordenar=categoria_en_lista(categoria,lista_pais, cmpVideosByViews)
+    tamaño=lt.size(lista_ordenar)
+    sub_list = lt.subList(lista_ordenar, 1, tamaño)
     sub_list = sub_list.copy()
     tiempo_inicio = time.process_time()
     if algoritmo=="shell":

@@ -58,7 +58,6 @@ def loadData(catalog):
     controller.loadData(catalog)
 
 def printResults(videos, sample):
-    sample=numeroT
     size = lt.size(videos)
     if size > sample:
         print("Los ", sample, " videos con más views son:")
@@ -87,14 +86,14 @@ while continuar==True:
         print('Paises cargados: ' + str(lt.size(catalog['paises'])))
     elif int(inputs[0]) == 2:
         print("Cargando videos con más views ....")
-        size = input("Indique tamaño de la muestra: ")
-        algoritmo=input("¿Con que algoritmo quiere que se desarrolle el proceso: shell,quick,merge,insertion o selection?")
-        numeroT=int(input("Que tan grande quiere que sea el top?"))
+        algoritmo=input("¿Con que algoritmo quiere que se desarrolle el proceso: shell,quick,merge,insertion o selection? ")
+        numeroT=int(input("¿Que tan grande quiere que sea el top? "))
         pais= input("Indique el pais que desea analizar: ")
         categoria= input("Indique la categoria que desea analizar: ")
-        result = controller.sortVideos(catalog, int(size),algoritmo,pais,categoria)
-        print("Para la muestra de", size, " videos, el tiempo (mseg) es: ", str(result[1]))
+        result = controller.sortVideos(catalog,algoritmo,pais,categoria)
+        print("El tiempo (mseg) es: ", str(result[1]))
         printResults(result[0],numeroT)
+        print(result)
     elif int(inputs[0]) == 3:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
     elif int(inputs[0]) == 4:
@@ -103,9 +102,6 @@ while continuar==True:
         print("Cargando videos con más likes de un tag en especifico ....")
     elif int(inputs[0]) == 0:
         continuar=False
-
-
-
 
     else:
         sys.exit(0)
