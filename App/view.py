@@ -23,6 +23,7 @@
 import config as cf
 import sys
 import controller
+import model
 from DISClib.ADT import list as lt
 assert cf
 
@@ -64,9 +65,9 @@ def printResults(videos, sample):
         i=1
         while i <= sample:
             video = lt.getElement(videos,i)
-            print('Titulo: ' + video['title'] + " views: " + video["views"]+ " canal: "
-            + video["channel_title"] + " fecha trending: "+ video["trending_date"]+" Fecha de publicación: "
-            + video["publish_time"] + " likes: "+video["likes"] +" dislikes: " +video["dislikes"])
+            print("Trending date: "+ video["trending_date"]+ ' Titulo: ' + video['title'] + " Canal: "
+            + video["channel_title"]+  " Fecha de publicación: "
+            + video["publish_time"]+" views: " + video["views"]  + " likes: "+video["likes"] +" dislikes: " +video["dislikes"])
             i+=1
 
 
@@ -93,7 +94,6 @@ while continuar==True:
         result = controller.sortVideos(catalog,algoritmo,pais,categoria)
         print("El tiempo (mseg) es: ", str(result[1]))
         printResults(result[0],numeroT)
-        print(result)
     elif int(inputs[0]) == 3:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
     elif int(inputs[0]) == 4:

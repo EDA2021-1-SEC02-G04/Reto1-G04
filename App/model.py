@@ -103,22 +103,20 @@ def addPaisVideo(catalog, nombre_pais, video):
 
 # Funciones para creacion de datos
 def traduccion(categoria,catalog):
-    print('hola2')
     m=catalog["categorias"]
-    for i in range(1,lt.size(m)):
-        
+    for i in range(1,lt.size(m)): 
         c=lt.getElement(m,i)
         if c['name'] == categoria:
             x=c['id']
-            print(x)
             return x
             break
+
 def newCategoria(name, id):
     """
     Esta estructura almacena las categorias con sus id respectivos.
     """
     categoria = {'name': '', 'id': '', "videos": None}
-    categoria['name'] = name.lower()
+    categoria['name'] = name.lower().strip()
     categoria['id'] = id
     categoria['videos'] = lt.newList('ARRAY_LIST')
     return categoria
@@ -138,12 +136,10 @@ def newPais(name):
 el error está en esta función
 """
 def categoria_en_lista(categoria,lista,comp,catalog):
-    print('hola')
     nueva_lista=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comp)
     cat_id=traduccion(categoria,catalog)
     for i in range(1,lt.size(lista)):
         video=lt.getElement(lista,i)
-
         if video['category_id']==cat_id:
             lt.addLast(nueva_lista,video)
     return nueva_lista
