@@ -102,6 +102,15 @@ def addPaisVideo(catalog, nombre_pais, video):
 
 
 # Funciones para creacion de datos
+def traduccion(categoria,catalog):
+    m=catalog["categorias"]
+    for i in range(1,lt.size(m)):
+        
+        c=lt.getElement(m,i)
+        if c['name'] == categoria:
+            x=c['id']
+            return x
+            break
 def newCategoria(name, id):
     """
     Esta estructura almacena las categorias con sus id respectivos.
@@ -126,10 +135,12 @@ def newPais(name):
 """
 el error está en esta función
 """
-def categoria_en_lista(cat_id,lista,comp):
+def categoria_en_lista(categoria,lista,comp,catalog):
     nueva_lista=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comp)
+    cat_id=traduccion(categoria,catalog)
     for i in range(1,lt.size(lista)):
         video=lt.getElement(lista,i)
+
         if video['category_id']==cat_id:
             lt.addLast(nueva_lista,video)
     return nueva_lista
@@ -169,7 +180,7 @@ def cmpVideosByViews(video1, video2):
 def sortVideos(catalog,algoritmo,pais,categoria):
     pais=obtener_videos_pais(catalog,pais)
     lista_pais=pais['videos']
-    lista_ordenar=categoria_en_lista(categoria,lista_pais, cmpVideosByViews)
+    lista_ordenar=categoria_en_lista(categoria,lista_pais, cmpVideosByViews,catalog)
     tamaño=lt.size(lista_ordenar)
     sub_list = lt.subList(lista_ordenar, 1, tamaño)
     sub_list = sub_list.copy()
