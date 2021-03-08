@@ -64,7 +64,7 @@ def addVideo(catalog, video):
         addPaisVideo(catalog, pais.strip(), video)
     for categoria in categorias:
         addCategoriaVideo(catalog, categoria.strip(), video)
-    addTrending(catalog,video)
+
 
 def addListaCategorias(catalog, categoria):
     """
@@ -102,14 +102,20 @@ def addPaisVideo(catalog, nombre_pais, video):
         lt.addLast(paises_lista, pais)
     lt.addLast(pais['videos'], video)
 
-def addTrending(catalog,video):
-    trending_lista = catalog['trending']
-    nombre_video=video['title']
-    posvideo = lt.isPresent(trending_lista, nombre_video)
+def addTrending(trending_lista,video):
+    video
+    posvideo = lt.isPresent(trending_lista, video)
     if posvideo > 0:
-        pass
+        print('.')
+        vid=lt.getElement(trending_lista, posvideo)
+        dias=vid['trending']
+        print(vid)
+        dias+=1
+        vid['trending']=dias
+        print(vid)
+        lt.changeInfo(trending_lista,posvideo,vid)
     else:
-        trending = newTrending(video,catalog)
+        trending = newTrending(video,trending_lista)
         lt.addLast(trending_lista, trending)
 
 # Funciones para creacion de datos
@@ -148,17 +154,16 @@ def newTrending(video,catalog):
     Crea una nueva estructura para modelar los libros de
     un autor y su promedio de ratings
     """
-    trending = {'name': None, 'channel':None, "categoria":None, 'pais': None, "trending":None}
+    trending = {'id':None, 'name': None, 'channel':None, "categoria":None, 'pais': None, "trending":None}
+    trending['id']=video['video_id']
     trending['name'] = video['title']
     trending['channel'] = video['channel_title']
     trending['categoria'] = video['category_id']
     trending['pais'] = video['country']
-    trending['trending']=contar_dias_trending(video['title'],catalog)
+    trending['trending']=1
     return trending
 # Funciones de consulta
-"""
-el error está en esta función
-"""
+
 def categoria_en_lista(categoria,lista,comp,catalog):
     nueva_lista=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comp)
     cat_id=traduccion(categoria,catalog)
@@ -174,17 +179,31 @@ def obtener_videos_pais(catalog,nombre_pais):
         pais = lt.getElement(catalog['paises'],posvideo)
         return pais 
     return None
-
+"""
 def contar_dias_trending(video_nombre,catalog):
     contador=0
     videos=catalog['videos']
     for i in range(1,lt.size(videos)): 
-        print('hola')
-        if lt.getElement(videos,i)['title']==video_nombre:
+        nombre=lt.getElement(videos,i)['title'].strip()
+        if nombre==video_nombre:
             contador+=1
             print(contador)
+    print((contador,video_nombre))
     return contador 
+"""
+def trending_categoria(catalog,categoria):
+    cat_id=traduccion(categoria,catalog)
+    indice=lt.isPresent(catalog['categorias'],cat_id)
+    lista_videos=lt.getElement(catalog['categorias'],indice)['videos']
+    lista_trending=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comparetrending)
+    for i in range(1,lt.size(lista_videos)):
+        video=lt.getElement(lista_videos,i)
+        addTrending(lista_trending,video)
+    return lista_trending
 
+def sortTrending(lista_trending):
+    sorted_list = ms.sort(lista_trending, cmpVideosByTrending)
+    return sorted_list
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparepaises(pais1, pais2):
@@ -196,7 +215,8 @@ def comparecategorias(categoria1_id, categoria2_id):
         return 0
     return -1
 def comparetrending(trending1, trending2):
-    if (trending1 == trending2['name']):
+    print(lt.getElement(trending1,1))
+    if (trending1 == trending2['id'].strip()):
         return 0
     return -1
 def cmpVideosByViews(video1, video2):
@@ -210,6 +230,20 @@ def cmpVideosByViews(video1, video2):
     """
     
     if (float(video1['views']) > float(video2['views'])):
+        return True
+    else:
+        return False
+def cmpVideosByTrending(video1, video2):
+    """
+    Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
+    Args:
+    video1: informacion del primer video que incluye su valor 'views'
+    video2
+
+    # Funciones de ordenamiento
+    """
+    
+    if (float(video1['trending']) > float(video2['trending'])):
         return True
     else:
         return False

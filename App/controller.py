@@ -63,3 +63,7 @@ def sortVideos(catalog,algoritmo,pais,categoria):
     return model.sortVideos(catalog,algoritmo,pais,categoria)
 
 # Funciones de consulta sobre el catálogo
+def trending_categoria(catalog,categoria):
+    lista_trending=model.trending_categoria(catalog,categoria)
+    return model.sortTrending(lista_trending)
+    

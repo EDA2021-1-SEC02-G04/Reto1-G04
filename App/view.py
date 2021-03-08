@@ -86,18 +86,21 @@ while continuar==True:
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
         print('Paises cargados: ' + str(lt.size(catalog['paises'])))
     elif int(inputs[0]) == 2:
-        print("Cargando videos con más views ....")
         algoritmo=input("¿Con que algoritmo quiere que se desarrolle el proceso: shell,quick,merge,insertion o selection? ")
         numeroT=int(input("¿Que tan grande quiere que sea el top? "))
         pais= input("Indique el pais que desea analizar: ").lower()
         categoria= input("Indique la categoria que desea analizar: ").lower()
+        print("Cargando videos con más views ....")
         result = controller.sortVideos(catalog,algoritmo,pais,categoria)
         print("El tiempo (mseg) es: ", str(result[1]))
         printResults(result[0],numeroT)
     elif int(inputs[0]) == 3:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
     elif int(inputs[0]) == 4:
-        print("Cargando video con más dias en trending ....")
+        categoria= input("Indique la categoria que desea analizar: ").lower()
+        print("Cargando video con más dias en trending en una categoria ....")
+        result = controller.trending_categoria(catalog,categoria)
+        print(lt.getElement(result,1))
     elif int(inputs[0]) == 5:
         print("Cargando videos con más likes de un tag en especifico ....")
     elif int(inputs[0]) == 0:
