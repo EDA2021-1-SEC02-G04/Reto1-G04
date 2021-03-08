@@ -64,7 +64,7 @@ def addVideo(catalog, video):
         addPaisVideo(catalog, pais.strip(), video)
     for categoria in categorias:
         addCategoriaVideo(catalog, categoria.strip(), video)
-
+    
 
 def addListaCategorias(catalog, categoria):
     """
@@ -106,13 +106,10 @@ def addTrending(trending_lista,video):
     video
     posvideo = lt.isPresent(trending_lista, video)
     if posvideo > 0:
-        print('.')
         vid=lt.getElement(trending_lista, posvideo)
         dias=vid['trending']
-        print(vid)
         dias+=1
         vid['trending']=dias
-        print(vid)
         lt.changeInfo(trending_lista,posvideo,vid)
     else:
         trending = newTrending(video,trending_lista)
@@ -215,8 +212,7 @@ def comparecategorias(categoria1_id, categoria2_id):
         return 0
     return -1
 def comparetrending(trending1, trending2):
-    print(lt.getElement(trending1,1))
-    if (trending1 == trending2['id'].strip()):
+    if (trending1['title'].strip() == trending2['name'].strip()):
         return 0
     return -1
 def cmpVideosByViews(video1, video2):

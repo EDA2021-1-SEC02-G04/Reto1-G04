@@ -70,6 +70,11 @@ def printResults(videos, sample):
             + video["publish_time"]+" views: " + video["views"]  + " likes: "+video["likes"] +" dislikes: " +video["dislikes"])
             i+=1
 
+def print_categoria_trending(result):
+    video=lt.getElement(result,1)
+    print('Titulo: ' + video['name'] + " Canal: "
+            + video["channel"]+  " Categoria_id: "
+            + str(video["categoria"])+" Días Trending: " + str(video["trending"]))
 
 """
 Menu principal
@@ -100,7 +105,7 @@ while continuar==True:
         categoria= input("Indique la categoria que desea analizar: ").lower()
         print("Cargando video con más dias en trending en una categoria ....")
         result = controller.trending_categoria(catalog,categoria)
-        print(lt.getElement(result,1))
+        print_categoria_trending(result)
     elif int(inputs[0]) == 5:
         print("Cargando videos con más likes de un tag en especifico ....")
     elif int(inputs[0]) == 0:
