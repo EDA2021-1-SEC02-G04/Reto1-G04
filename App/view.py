@@ -23,7 +23,6 @@
 import config as cf
 import sys
 import controller
-import model
 from DISClib.ADT import list as lt
 assert cf
 
