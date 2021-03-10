@@ -61,6 +61,8 @@ def sortVideos(catalog,algoritmo,pais,categoria):
     Ordena los videos por average_rating
     """
     return model.sortVideos(catalog,algoritmo,pais,categoria)
+def sortLikes(tag,catalog,pais):
+    return model.sortLikes(tag,catalog,pais)
 
 # Funciones de consulta sobre el catálogo
 def trending_categoria(catalog,categoria):

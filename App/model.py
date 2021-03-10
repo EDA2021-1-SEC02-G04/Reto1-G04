@@ -170,6 +170,16 @@ def categoria_en_lista(categoria,lista,comp,catalog):
             lt.addLast(nueva_lista,video)
     return nueva_lista
 
+def tags_en_lista(tag,lista,catalog):
+    nueva_lista=lt.newList(datastructure='ARRAY_LIST',cmpfunction=cmpVideosByLikes)
+    for i in range(1,lt.size(lista)):
+        video=lt.getElement(lista,i)
+        if tag in video["tags"]:
+            lt.addLast(nueva_lista,video)
+    return nueva_lista
+
+
+
 def obtener_videos_pais(catalog,nombre_pais):
     posvideo = lt.isPresent(catalog['paises'], nombre_pais)
     if posvideo > 0:
@@ -229,6 +239,14 @@ def cmpVideosByViews(video1, video2):
         return True
     else:
         return False
+def cmpVideosByLikes(video1, video2):
+    
+    
+    if (float(video1['likes']) > float(video2['likes'])):
+        return True
+    else:
+        return False
+
 def cmpVideosByTrending(video1, video2):
     """
     Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
@@ -243,6 +261,15 @@ def cmpVideosByTrending(video1, video2):
         return True
     else:
         return False
+
+def sortLikes(tag,catalog,pais):
+    
+    pais=obtener_videos_pais(catalog,pais)
+    lista_pais=pais['videos']
+    lista_tags=tags_en_lista(tag,lista_pais,catalog)
+    sorted_list = ms.sort(lista_tags, cmpVideosByLikes)
+    return sorted_list
+
 def sortVideos(catalog,algoritmo,pais,categoria):
     pais=obtener_videos_pais(catalog,pais)
     lista_pais=pais['videos']
