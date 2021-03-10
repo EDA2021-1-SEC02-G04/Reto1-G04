@@ -69,6 +69,18 @@ def printResults(videos, sample):
             + video["channel_title"]+  " Fecha de publicación: "
             + video["publish_time"]+" views: " + video["views"]  + " likes: "+video["likes"] +" dislikes: " +video["dislikes"])
             i+=1
+def printTags(videos, sample):
+    size = lt.size(videos)
+    if size > sample:
+        print("Los ", sample, " videos con más likes son:")
+        i=1
+        while i <= sample:
+            video = lt.getElement(videos,i)
+            print(' Titulo: ' + video['title'] + " Canal: "
+            + video["channel_title"]+  " Fecha de publicación: "
+            + video["publish_time"]+" views: " + video["views"]  + " likes: "+video["likes"] +" dislikes: " +video["dislikes"]+" Tags:: " +video["tags"])
+            i+=1
+
 
 def print_categoria_trending(result):
     video=lt.getElement(result,1)
@@ -108,6 +120,13 @@ while continuar==True:
         print_categoria_trending(result)
     elif int(inputs[0]) == 5:
         print("Cargando videos con más likes de un tag en especifico ....")
+        tag=input("Indique el tag: ")
+        pais= input("Indique el pais que desea analizar: ").lower()
+        result=controller.sortLikes(tag,catalog,pais)
+        numeroT=int(input("¿Que tan grande quiere que sea el top? "))
+        printTags(result,numeroT)
+        
+
     elif int(inputs[0]) == 0:
         continuar=False
 
