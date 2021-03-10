@@ -78,7 +78,7 @@ def printTags(videos, sample):
             video = lt.getElement(videos,i)
             print(' Titulo: ' + video['title'] + " Canal: "
             + video["channel_title"]+  " Fecha de publicación: "
-            + video["publish_time"]+" views: " + video["views"]  + " likes: "+video["likes"] +" dislikes: " +video["dislikes"]+" Tags:: " +video["tags"])
+            + video["publish_time"]+" views: " + video["views"]  + " likes: "+video["likes"] +" dislikes: " +video["dislikes"]+" Tags:: " +video["tags"]+" Pais: "+video["country"])
             i+=1
 
 
