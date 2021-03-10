@@ -68,4 +68,7 @@ def sortLikes(tag,catalog,pais):
 def trending_categoria(catalog,categoria):
     lista_trending=model.trending_categoria(catalog,categoria)
     return model.sortTrending(lista_trending)
-    
+
+def trending_paises(catalog,pais):
+    lista_trending= model.trending_paises(catalog,pais)
+    return model.sortTrending(lista_trending)

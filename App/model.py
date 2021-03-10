@@ -170,6 +170,14 @@ def categoria_en_lista(categoria,lista,comp,catalog):
             lt.addLast(nueva_lista,video)
     return nueva_lista
 
+def Pais_en_lista(pais,lista,catalog):
+    nueva_lista=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comparepaises)
+    for i in range(1,lt.size(lista)):
+        video=lt.getElement(lista,i)
+        if video['country']==pais:
+            lt.addLast(nueva_lista,video)
+    return nueva_lista
+
 def tags_en_lista(tag,lista,catalog):
     nueva_lista=lt.newList(datastructure='ARRAY_LIST',cmpfunction=cmpVideosByLikes)
     for i in range(1,lt.size(lista)):
@@ -202,6 +210,15 @@ def trending_categoria(catalog,categoria):
     cat_id=traduccion(categoria,catalog)
     indice=lt.isPresent(catalog['categorias'],cat_id)
     lista_videos=lt.getElement(catalog['categorias'],indice)['videos']
+    lista_trending=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comparetrending)
+    for i in range(1,lt.size(lista_videos)):
+        video=lt.getElement(lista_videos,i)
+        addTrending(lista_trending,video)
+    return lista_trending
+
+def trending_paises(catalog,pais):
+    indice=lt.isPresent(catalog['paises'],pais)
+    lista_videos=lt.getElement(catalog['paises'],indice)['videos']
     lista_trending=lt.newList(datastructure='ARRAY_LIST',cmpfunction=comparetrending)
     for i in range(1,lt.size(lista_videos)):
         video=lt.getElement(lista_videos,i)
