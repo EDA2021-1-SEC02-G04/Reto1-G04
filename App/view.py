@@ -114,7 +114,7 @@ while continuar==True:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
         pais=input("Indique el pais que desea analizar: ")
         result=controller.trending_paises(catalog,pais)
-        print (print_categoria_trending(result))
+        print_categoria_trending(result)
     elif int(inputs[0]) == 4:
         categoria= input("Indique la categoria que desea analizar: ").lower()
         print("Cargando video con más dias en trending en una categoria ....")
