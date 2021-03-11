@@ -287,7 +287,7 @@ def sortLikes(tag,catalog,pais):
     sorted_list = ms.sort(lista_tags, cmpVideosByLikes)
     return sorted_list
 
-def sortVideos(catalog,algoritmo,pais,categoria):
+def sortVideos(catalog,pais,categoria):
     pais=obtener_videos_pais(catalog,pais)
     lista_pais=pais['videos']
     lista_ordenar=categoria_en_lista(categoria,lista_pais, cmpVideosByViews,catalog)
@@ -295,18 +295,7 @@ def sortVideos(catalog,algoritmo,pais,categoria):
     sub_list = lt.subList(lista_ordenar, 1, tamaño)
     sub_list = sub_list.copy()
     tiempo_inicio = time.process_time()
-    if algoritmo=="shell":
-        sorted_list = sa.sort(sub_list, cmpVideosByViews)
-    elif algoritmo=="selection":
-        sorted_list = ss.sort(sub_list, cmpVideosByViews)
-    elif algoritmo=="insertion":
-        sorted_list = ins.sort(sub_list, cmpVideosByViews)
-    elif algoritmo=="merge":
-        sorted_list = ms.sort(sub_list, cmpVideosByViews)
-    elif algoritmo=="quick":
-        sorted_list = qs.sort(sub_list, cmpVideosByViews)
-    else:
-        return "Vuelva a escribir en minusculas"
+    sorted_list = ms.sort(lista_tags, cmpVideosByLikes)
     tiempo_final = time.process_time()
     tiempo = (tiempo_final - tiempo_inicio)*1000
     return sorted_list,tiempo
