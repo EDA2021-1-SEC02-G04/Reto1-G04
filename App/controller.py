@@ -20,9 +20,12 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+import time
+import tracemalloc
 import config as cf
 import model
 import csv
+
 
 
 """
@@ -35,9 +38,22 @@ def initCatalog(estructura:str):
     return catalog
 
 def loadData(catalog):
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
     loadCategorias(catalog)
     loadVideos(catalog)
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
     
+    return (delta_time,delta_memory)
 
 # Funciones para la carga de datos
 
@@ -60,15 +76,98 @@ def sortVideos(catalog,pais,categoria):
     """
     Ordena los videos por average_rating
     """
-    return model.sortVideos(catalog,pais,categoria)
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
+    respuesta=model.sortVideos(catalog,pais,categoria)
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+    
+    return (delta_time,delta_memory,respuesta)
 def sortLikes(tag,catalog,pais):
-    return model.sortLikes(tag,catalog,pais)
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
+    respuesta=model.sortLikes(tag,catalog,pais)
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+    return (delta_time,delta_memory,respuesta)
+
 
 # Funciones de consulta sobre el catálogo
 def trending_categoria(catalog,categoria):
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
     lista_trending=model.trending_categoria(catalog,categoria)
-    return model.sortTrending(lista_trending)
+    respuesta=model.sortTrending(lista_trending)
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+    return (delta_time,delta_memory,respuesta)
 
 def trending_paises(catalog,pais):
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
     lista_trending= model.trending_paises(catalog,pais)
-    return model.sortTrending(lista_trending)
+    respuesta=model.sortTrending(lista_trending)
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+    
+    return (delta_time,delta_memory,respuesta)
+def getTime():
+    """
+    devuelve el instante tiempo de procesamiento en milisegundos
+    """
+    return float(time.perf_counter()*1000)
+
+
+def getMemory():
+    """
+    toma una muestra de la memoria alocada en instante de tiempo
+    """
+    return tracemalloc.take_snapshot()
+
+
+def deltaMemory(start_memory, stop_memory):
+    """
+    calcula la diferencia en memoria alocada del programa entre dos
+    instantes de tiempo y devuelve el resultado en bytes (ej.: 2100.0 B)
+    """
+    memory_diff = stop_memory.compare_to(start_memory, "filename")
+    delta_memory = 0.0
+
+    # suma de las diferencias en uso de memoria
+    for stat in memory_diff:
+        delta_memory = delta_memory + stat.size_diff
+    # de Byte -> kByte
+    delta_memory = delta_memory/1024.0
+    return delta_memory

@@ -85,7 +85,7 @@ def print_categoria_trending(result):
     video=lt.getElement(result,1)
     print('Titulo: ' + video['name'] + " Canal: "
             + video["channel"]+  " Categoria_id: "
-            + str(video["categoria"])+" Días Trending: " + str(video["trending"]+" Pais: "+video["country"]))
+            + str(video["categoria"])+" Días Trending: " + str(video["trending"])+" Pais: "+video["pais"])
     
 def print_categoria_pais(result):
     video=lt.getElement(result,1)
@@ -106,31 +106,40 @@ while continuar==True:
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
         print('Paises cargados: ' + str(lt.size(catalog['paises'])))
+        print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
+              "Memoria [kB]: ", f"{answer[1]:.3f}")
     elif int(inputs[0]) == 2:
         numeroT=int(input("¿Que tan grande quiere que sea el top? "))
         pais= input("Indique el pais que desea analizar: ").lower()
         categoria= input("Indique la categoria que desea analizar: ").lower()
         print("Cargando videos con más views ....")
-        result = controller.sortVideos(catalog,pais,categoria)
-        print("El tiempo (mseg) es: ", str(result[1]))
-        printResults(result[0],numeroT)
+        answer = controller.sortVideos(catalog,pais,categoria)
+        printResults(answer[2],numeroT)
+        print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
+              "Memoria [kB]: ", f"{answer[1]:.3f}")
     elif int(inputs[0]) == 3:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
         pais=input("Indique el pais que desea analizar: ")
-        result=controller.trending_paises(catalog,pais)
-        print_categoria_pais(result)
+        answer=controller.trending_paises(catalog,pais)
+        print_categoria_pais(answer[2])
+        print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
+              "Memoria [kB]: ", f"{answer[1]:.3f}")
     elif int(inputs[0]) == 4:
         categoria= input("Indique la categoria que desea analizar: ").lower()
         print("Cargando video con más dias en trending en una categoria ....")
-        result = controller.trending_categoria(catalog,categoria)
-        print_categoria_trending(result)
+        answer = controller.trending_categoria(catalog,categoria)
+        print_categoria_trending(answer[2])
+        print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
+              "Memoria [kB]: ", f"{answer[1]:.3f}")
     elif int(inputs[0]) == 5:
         print("Cargando videos con más likes de un tag en especifico ....")
         tag=input("Indique el tag: ")
         pais= input("Indique el pais que desea analizar: ").lower()
-        result=controller.sortLikes(tag,catalog,pais)
+        answer=controller.sortLikes(tag,catalog,pais)
         numeroT=int(input("¿Que tan grande quiere que sea el top? "))
-        printTags(result,numeroT)
+        printTags(answer[2],numeroT)
+        print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
+              "Memoria [kB]: ", f"{answer[1]:.3f}")
         
 
     elif int(inputs[0]) == 0:
