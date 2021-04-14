@@ -55,7 +55,8 @@ def loadData(catalog):
     """
     Carga los videos en la estructura de datos
     """
-    controller.loadData(catalog)
+    return controller.loadData(catalog)
+
 
 def printResults(videos, sample):
     size = lt.size(videos)
@@ -102,7 +103,7 @@ while continuar==True:
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
         catalog = initCatalog("ARRAY_LIST")
-        loadData(catalog)
+        answer=loadData(catalog)
         print('Videos cargados: ' + str(lt.size(catalog['videos'])))
         print('Categorias cargadas: ' + str(lt.size(catalog['categorias'])))
         print('Paises cargados: ' + str(lt.size(catalog['paises'])))
@@ -121,6 +122,7 @@ while continuar==True:
         print("Cargando videos con mayor tiempo en trending en un pais ....")
         pais=input("Indique el pais que desea analizar: ")
         answer=controller.trending_paises(catalog,pais)
+        
         print_categoria_pais(answer[2])
         print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
               "Memoria [kB]: ", f"{answer[1]:.3f}")
